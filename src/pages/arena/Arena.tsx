@@ -1,0 +1,316 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React from 'react';
+import { GameLevel, LevelHighScore, CharacterId, CommandAction, Instruction } from '../../types';
+
+// Import subcomponents
+import GridMap, { CharacterRenderData } from './components/GridMap';
+import CommandPanel from './components/CommandPanel';
+import RotateDevicePrompt from './components/RotateDevicePrompt';
+import Toast from './components/Toast';
+
+// Import custom hook
+import { useArenaGame } from './hooks/useArenaGame';
+import { useIsMobile } from './hooks/useIsMobile';
+
+import LevelSuccessModal from './components/modals/LevelSuccessModal';
+import LevelFailModal from './components/modals/LevelFailModal';
+import HintModal from './components/modals/HintModal';
+import ButtonGuideTour from './components/ButtonGuideTour';
+
+import bgArenaGame from '@/assets/bg-arena-game.webp';
+
+interface ArenaProps {
+  level: GameLevel;
+  highScores: { [key: number]: LevelHighScore };
+  onSaveHighScore: (levelId: number, stars: number, minSteps: number) => void;
+  onBackToDashboard: () => void;
+  onNextLevel: () => void;
+  isMuted: boolean;
+  onToggleMute: () => void;
+}
+
+export default function Arena({
+  level,
+  onSaveHighScore,
+  onBackToDashboard,
+  onNextLevel,
+  isMuted,
+  onToggleMute
+}: ArenaProps) {
+  // Use custom hook to manage simulation states and event handlers
+  const {
+    activeCharacter,
+    setActiveCharacter,
+    characterStates,
+    isExecuting,
+    activeTrash,
+    gameResult,
+    resultStars,
+    totalSteps,
+    showResultModal,
+    setShowResultModal,
+    showHintsModal,
+    setShowHintsModal,
+    execSpeed,
+    setExecSpeed,
+    totalBlockCount,
+    handleAddCommand,
+    handleClearInstructions,
+    handleUpdateInstructions,
+    handleDeleteCommand,
+    handleMoveCommandUp,
+    handleMoveCommandDown,
+    handleStartExecution,
+    handleStopExecution,
+    handleReset,
+    playSound
+  } = useArenaGame(level, isMuted, onSaveHighScore);
+
+  const isMobile = useIsMobile();
+
+  const [toastMessage, setToastMessage] = React.useState<string | null>(null);
+  const lastBlockCountRef = React.useRef(totalBlockCount);
+
+  // Tur pengenalan tombol satu-per-satu, tampil otomatis saat Level 1 dibuka (hanya sekali),
+  // dan BARU dimulai setelah "Panduan Cara Bermain" (HintModal) ditutup.
+  const BUTTON_GUIDE_STORAGE_KEY = 'pemilah_sampah_button_guide_seen';
+  const [showButtonGuide, setShowButtonGuide] = React.useState(false);
+  const [wantButtonGuide, setWantButtonGuide] = React.useState(false);
+
+  React.useEffect(() => {
+    setShowButtonGuide(false);
+    if (level.id !== 1) {
+      setWantButtonGuide(false);
+      return;
+    }
+    let alreadySeen = false;
+    try {
+      alreadySeen = localStorage.getItem(BUTTON_GUIDE_STORAGE_KEY) === '1';
+    } catch {
+      alreadySeen = false;
+    }
+    setWantButtonGuide(!alreadySeen);
+  }, [level.id]);
+
+  // Mulai tur setelah HintModal tertutup (beri jeda agar panel tombol selesai ter-render)
+  React.useEffect(() => {
+    if (!wantButtonGuide || showHintsModal) return;
+    const t = setTimeout(() => setShowButtonGuide(true), 300);
+    return () => clearTimeout(t);
+  }, [wantButtonGuide, showHintsModal]);
+
+  const handleCloseButtonGuide = () => {
+    try {
+      localStorage.setItem(BUTTON_GUIDE_STORAGE_KEY, '1');
+    } catch {
+      // Abaikan jika localStorage tidak tersedia
+    }
+    setWantButtonGuide(false);
+    setShowButtonGuide(false);
+  };
+
+  React.useEffect(() => {
+    const isOverLimit = level.maxInstructions ? totalBlockCount > level.maxInstructions : false;
+    if (isOverLimit) {
+      if (totalBlockCount > lastBlockCountRef.current || !toastMessage) {
+        setToastMessage(`Blok kode melebihi kapasitas (${level.maxInstructions})! Hapus beberapa blok.`);
+      }
+    } else {
+      setToastMessage(null);
+    }
+    lastBlockCountRef.current = totalBlockCount;
+  }, [totalBlockCount, level.maxInstructions, toastMessage]);
+
+  // Build render data for GridMap
+  const characterRenderData: CharacterRenderData[] = (level.characters || []).map(character => {
+    const state = characterStates[character.id];
+    const activeStep = state?.compiledSteps.find(s => s.instructionId === state.activeInstructionId);
+    return {
+      id: character.id,
+      pos: state?.pos || character.startPos,
+      facingDir: state?.facingDir || 'RIGHT',
+      trailPositions: state?.trailPositions || [],
+      backpack: state?.backpack || [],
+      backpackCapacity: level.maxCapacity ?? level.trashItems.length,
+      activeAction: activeStep?.action || null,
+      activeInstructionId: state?.activeInstructionId || null,
+      isDumping: state?.isDumping || false,
+      dumpingCanType: state?.dumpingCanType || null,
+      isPicking: state?.isPicking || false,
+    };
+  });
+
+  // Dev Auto-Solve Helper function for testing all levels
+  const handleDevAutoSolve = () => {
+    playSound('click');
+    const levelId = level.id;
+    
+    // Helper to generate instructions with random unique IDs
+    const createInstructions = (actions: CommandAction[]): Instruction[] => {
+      return actions.map(act => ({ id: Math.random().toString(36).substring(2, 9), type: act }));
+    };
+
+    let actions: CommandAction[] = [];
+
+    if (levelId === 1) {
+      // Level 1: Mulai x=0 -> KANAN 3x ke x=3 AMBIL (Apel) -> KANAN 1x ke x=4 LONCAT batu x=5 ke x=6 -> KANAN 1x ke x=7 AMBIL (Kaleng Minuman) -> KANAN 7x ke x=14 BUANG (Kaleng Minuman) -> KIRI 1x ke x=13 BUANG (Apel)
+      actions = [
+        'RIGHT', 'RIGHT', 'RIGHT', 'PICK',
+        'RIGHT', 'UP', 'RIGHT', 'PICK',
+        'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'DROP',
+        'LEFT', 'DROP'
+      ];
+    } else if (levelId === 2) {
+      // Level 2: Mulai x=0 -> KANAN 3x ke x=3 AMBIL (Apel) -> KANAN 1x ke x=4 LONCAT batu x=5 ke x=6 -> KANAN 1x ke x=7 AMBIL (Kaleng Minuman) -> KANAN 1x ke x=8 LONCAT batu x=9 ke x=10 AMBIL (Baterai Bekas) -> KANAN 5x ke x=15 BUANG (Baterai Bekas) -> KIRI 1x ke x=14 BUANG (Kaleng Minuman) -> KIRI 1x ke x=13 BUANG (Apel)
+      actions = [
+        'RIGHT', 'RIGHT', 'RIGHT', 'PICK',
+        'RIGHT', 'UP', 'RIGHT', 'PICK',
+        'RIGHT', 'UP', 'PICK',
+        'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'DROP',
+        'LEFT', 'DROP',
+        'LEFT', 'DROP'
+      ];
+    } else if (levelId === 3) {
+      // Level 3 (Kapasitas Tas 4 Slot - Sesuai 4 Sampah):
+      // Ambil 4 sampah berurutan (Apel x=1, Kaleng x=3, Sayur x=7, Baterai x=11) -> Buang Baterai di Tong Merah (x=15) -> Buang Sayur di Tong Hijau (x=13) -> Buang Kaleng di Tong Kuning (x=14) -> Buang Apel di Tong Hijau (x=13) (Total 24 Langkah, 3 Bintang)
+      actions = [
+        'RIGHT', 'PICK',
+        'UP', 'PICK',
+        'RIGHT', 'UP', 'RIGHT', 'PICK',
+        'RIGHT', 'UP', 'RIGHT', 'PICK',
+        'RIGHT', 'RIGHT', 'RIGHT', 'RIGHT', 'DROP',
+        'LEFT', 'LEFT', 'DROP',
+        'RIGHT', 'DROP',
+        'LEFT', 'DROP'
+      ];
+    }
+
+    handleUpdateInstructions('ORGANIC', createInstructions(actions));
+  };
+
+  return (
+    <div className="relative h-dvh overflow-hidden bg-[#FEF8F0] text-[#1C1917] flex flex-col selection:bg-indigo-500/30 font-sans leading-relaxed">
+      {/* Background Image with blur & opacity-60 */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center opacity-60 backdrop-blur-md pointer-events-none"
+        style={{ backgroundImage: `url(${bgArenaGame})` }}
+      />
+      <RotateDevicePrompt />
+
+      {toastMessage && (
+        <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
+      )}
+
+      {/* Floating Developer Auto-Solve Button (Hidden) */}
+      <button
+        onClick={handleDevAutoSolve}
+        className="hidden fixed bottom-3 left-3 z-50 px-3 py-2 bg-indigo-650 hover:bg-indigo-600 border border-indigo-700 text-white text-[11px] font-bold rounded-xl shadow-md cursor-pointer transition-all items-center gap-1.5 active:scale-95 hover:scale-[1.02] opacity-40 hover:opacity-100"
+        title="Auto-fill correct steps for this level"
+      >
+        🛠️ Dev Auto-Solve
+      </button>
+
+      {/* Main Core Layout Body */}
+      <main className="flex-1 max-w-7xl w-full mx-auto p-1 sm:p-2 flex flex-col gap-1 sm:gap-2 min-h-0">
+        {/* Top workspace: Canvas map */}
+        <div className={`${isMobile ? "h-[45%]" : "h-[58%]"} flex flex-col min-h-0 relative z-30 overflow-visible`} id="top-workspace">
+          <GridMap
+            levelId={level.id}
+            width={level.gridSize.width}
+            height={level.gridSize.height}
+            characters={characterRenderData}
+            trashItems={activeTrash}
+            trashCans={level.trashCans}
+            obstacles={level.obstacles}
+            isExecuting={isExecuting}
+            onShowHints={() => { playSound('click'); setShowHintsModal(true); }}
+            isMuted={isMuted}
+            onToggleMute={onToggleMute}
+            onBackToDashboard={onBackToDashboard}
+          />
+        </div>
+
+        {/* Bottom workspace: Command builder */}
+        <div className="flex-1 flex flex-col min-h-0" id="bottom-workspace">
+          <CommandPanel
+            isMobile={isMobile}
+            level={level}
+            activeCharacter={activeCharacter}
+            instructions={characterStates[activeCharacter]?.instructions || []}
+            onUpdateInstructions={(updated) => handleUpdateInstructions(activeCharacter, updated)}
+            onAddCommand={handleAddCommand}
+            onClearInstructions={handleClearInstructions}
+            onDeleteCommand={handleDeleteCommand}
+            onMoveCommandUp={handleMoveCommandUp}
+            onMoveCommandDown={handleMoveCommandDown}
+            onSelectCharacter={setActiveCharacter}
+            isExecuting={isExecuting}
+            onStartExecution={handleStartExecution}
+            onStopExecution={handleStopExecution}
+            activeInstructionId={characterStates[activeCharacter]?.activeInstructionId || null}
+            execSpeed={execSpeed}
+            onSetExecSpeed={setExecSpeed}
+            onReset={handleReset}
+            totalBlockCount={totalBlockCount}
+            characterBlocksCount={{
+              ORGANIC: characterStates.ORGANIC?.instructions.length || 0,
+              RECYCLABLE: characterStates.RECYCLABLE?.instructions.length || 0,
+              B3: characterStates.B3?.instructions.length || 0,
+            }}
+          />
+        </div>
+      </main>
+
+      {/* Level Success Modal */}
+      <LevelSuccessModal
+        isOpen={showResultModal && gameResult === 'SUCCESS'}
+        onClose={() => setShowResultModal(false)}
+        stars={resultStars}
+        totalSteps={totalSteps}
+        level={level}
+        onNextLevel={onNextLevel}
+        onBackToDashboard={onBackToDashboard}
+        onRetry={() => {
+          setShowResultModal(false);
+          handleReset();
+        }}
+        playSound={playSound}
+      />
+
+      {/* Level Fail Modal */}
+      <LevelFailModal
+        isOpen={showResultModal && gameResult === 'FAILED'}
+        onClose={() => setShowResultModal(false)}
+        gameResult={gameResult}
+        onRetry={() => {
+          setShowResultModal(false);
+          handleReset();
+        }}
+        onShowHints={() => {
+          setShowResultModal(false);
+          setShowHintsModal(true);
+        }}
+        playSound={playSound}
+      />
+
+      {/* Hints Modal */}
+      <HintModal
+        isOpen={showHintsModal}
+        onClose={() => setShowHintsModal(false)}
+        level={level}
+        playSound={playSound}
+      />
+
+      {/* Button Guide Tour (Level 1 intro — menyorot tombol satu per satu) */}
+      <ButtonGuideTour
+        isOpen={showButtonGuide}
+        onClose={handleCloseButtonGuide}
+        playSound={playSound}
+      />
+    </div>
+  );
+}

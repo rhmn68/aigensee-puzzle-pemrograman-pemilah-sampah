@@ -9,6 +9,7 @@ import { Target, CheckCircle2, ListOrdered, Layers, ChevronLeft, ChevronRight, X
 interface ObjectivesModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onStart: () => void;
 }
 
 interface Slide {
@@ -65,7 +66,7 @@ interface TileProps {
   icon: React.ReactNode;
 }
 
-export default function ObjectivesModal({ isOpen, onClose }: ObjectivesModalProps) {
+export default function ObjectivesModal({ isOpen, onClose, onStart }: ObjectivesModalProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   if (!isOpen) return null;
@@ -77,7 +78,7 @@ export default function ObjectivesModal({ isOpen, onClose }: ObjectivesModalProp
 
   const goNext = () => {
     if (isLast) {
-      onClose();
+      onStart();
     } else {
       setCurrentSlide(p => p + 1);
     }

@@ -17,6 +17,7 @@ interface DashboardProps {
   levels: GameLevel[];
   highScores: { [key: number]: LevelHighScore };
   onSelectLevel: (levelId: number) => void;
+  onStartFromObjectives: () => void;
   onBack: () => void;
   isMuted: boolean;
   onToggleMute: () => void;
@@ -68,6 +69,7 @@ export default function Dashboard({
   levels,
   highScores,
   onSelectLevel,
+  onStartFromObjectives,
   onBack,
   isMuted,
   onToggleMute
@@ -189,6 +191,10 @@ export default function Dashboard({
       <ObjectivesModal
         isOpen={showObjectives}
         onClose={() => setShowObjectives(false)}
+        onStart={() => {
+          setShowObjectives(false);
+          onStartFromObjectives();
+        }}
       />
     </div>
   );

@@ -70,7 +70,7 @@ export default function App() {
   const handleSelectLevel = (levelId: number) => {
     playClickSound();
     setActiveLevelId(levelId);
-    setPage('video');
+    setPage('arena');
   };
 
   const handleSaveHighScore = (levelId: number, stars: number, minSteps: number) => {
@@ -220,6 +220,10 @@ export default function App() {
           levels={LEVELS}
           highScores={highScores}
           onSelectLevel={handleSelectLevel}
+          onStartFromObjectives={() => {
+            playClickSound();
+            setPage('video');
+          }}
           onBack={navigateToSplash}
           isMuted={isMuted}
           onToggleMute={handleToggleMute}
@@ -252,7 +256,7 @@ export default function App() {
               type="button"
               onClick={() => {
                 playClickSound();
-                setPage('arena');
+                setPage('dashboard');
               }}
               className="rounded-xl bg-[#0f5a31] px-5 py-2.5 font-bold text-white shadow-md transition-colors hover:bg-[#0b4826] cursor-pointer"
             >

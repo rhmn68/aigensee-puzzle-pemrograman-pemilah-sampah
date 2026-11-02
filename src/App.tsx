@@ -17,8 +17,8 @@ import { playSfx, syncBgmState, initUserInteractionListener } from './utils/audi
 import { preloadAllGameAssets } from './utils/assetPreloader';
 
 export default function App() {
-  // Global screen state: 'splash' | 'dashboard' | 'arena'
-  const [page, setPage] = useState<'splash' | 'dashboard' | 'arena'>('splash');
+  // Global screen state
+  const [page, setPage] = useState<'splash' | 'dashboard' | 'video' | 'arena'>('splash');
 
   // Asset preloading state — ensures all images & videos finish downloading first on initial open
   const [isAssetsLoaded, setIsAssetsLoaded] = useState(false);
@@ -64,13 +64,13 @@ export default function App() {
 
   // Sync mute state with background music
   useEffect(() => {
-    syncBgmState(isMuted);
-  }, [isMuted]);
+    syncBgmState(isMuted || page === 'video');
+  }, [isMuted, page]);
 
   const handleSelectLevel = (levelId: number) => {
     playClickSound();
     setActiveLevelId(levelId);
-    setPage('arena');
+    setPage('video');
   };
 
   const handleSaveHighScore = (levelId: number, stars: number, minSteps: number) => {
@@ -224,6 +224,42 @@ export default function App() {
           isMuted={isMuted}
           onToggleMute={handleToggleMute}
         />
+      )}
+
+      {page === 'video' && (
+        <main className="h-full overflow-y-auto flex flex-col items-center justify-center gap-3 bg-[#FEF8F0] p-4 pb-8">
+          <h1 className="text-lg sm:text-2xl font-extrabold text-amber-950 text-center">
+            Tonton Video Sebelum Bermain
+          </h1>
+          <iframe
+            className="w-full max-w-4xl aspect-video max-h-[65dvh] rounded-2xl border-2 border-[#EED4B7] bg-black shadow-lg"
+            src="https://www.youtube-nocookie.com/embed/l4HZLy8FtcU?playsinline=1"
+            title="Video pengantar permainan pemilahan sampah"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href="https://youtu.be/l4HZLy8FtcU"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-sky-700 underline"
+            >
+              Buka di YouTube
+            </a>
+            <button
+              type="button"
+              onClick={() => {
+                playClickSound();
+                setPage('arena');
+              }}
+              className="rounded-xl bg-[#0f5a31] px-5 py-2.5 font-bold text-white shadow-md transition-colors hover:bg-[#0b4826] cursor-pointer"
+            >
+              Lanjut Bermain
+            </button>
+          </div>
+        </main>
       )}
 
       {page === 'arena' && (

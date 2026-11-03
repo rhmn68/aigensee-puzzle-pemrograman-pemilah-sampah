@@ -115,7 +115,7 @@ export default function Dashboard({
 
       {/* Main Container Wrapper */}
       <div className={`z-10 w-full max-w-5xl bg-transparent lg:bg-white/50 lg:backdrop-blur-md border-0 lg:border-[3px] md:border-[5px] border-transparent lg:border-[#0f5a31] rounded-none lg:rounded-2xl md:rounded-[24px] shadow-none lg:shadow-2xl lg:overflow-hidden flex flex-col p-2 lg:p-10 justify-center min-h-0 animate-fade-in transition-all duration-500 ${showObjectives ? 'invisible pointer-events-none' : ''}`}>
-        
+
         {/* Header Title */}
         <header className="w-fit lg:max-w-none mx-auto flex flex-col items-center text-center shrink-0 bg-white/80 backdrop-blur-md border-[3px] border-[#0f5a31] rounded-2xl shadow-md py-1.5 px-6 mb-3 lg:bg-transparent lg:backdrop-blur-none lg:border-0 lg:shadow-none lg:p-0 lg:mb-4">
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black font-display tracking-wide text-black leading-tight drop-shadow-sm select-none">
@@ -164,10 +164,10 @@ export default function Dashboard({
                   <div className="mt-auto shrink-0">
                     <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3">
                       <span className={`inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg sm:rounded-xl ${theme.statsBg} font-bold text-[9px] lg:text-xs`}>
-                        📦 {level.trashItems.length} Sampah
+                         {level.trashItems.length} Sampah
                       </span>
                       <span className={`inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg sm:rounded-xl ${theme.statsBg} font-bold text-[9px] lg:text-xs`}>
-                        🧩 Max {level.maxInstructions} Blok
+                         Max {level.maxInstructions} Blok
                       </span>
                     </div>
 

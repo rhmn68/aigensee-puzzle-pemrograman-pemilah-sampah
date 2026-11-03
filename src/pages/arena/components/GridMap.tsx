@@ -654,11 +654,11 @@ export default function GridMap({
         }
       }
 
-      // Fallback emoji rendering for bush/water or un-loaded assets
+      // Fallback label rendering for bush/water or un-loaded assets
       ctx.font = `${Math.min(cellSizeVal * sizeScale, 30)}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText(obs.emoji, cx2, cy2);
+      ctx.fillText(({ bush: 'Semak', rock: 'Batu', wall: 'Dinding', water: 'Air' }[obs.type]), cx2, cy2);
       ctx.restore();
     });
 
@@ -671,7 +671,7 @@ export default function GridMap({
       const yOffset = itemConfig.yOffset ?? DEFAULT_ELEMENT_CONFIGS.defaultCategory.trash.yOffset;
       const sizeScale = itemConfig.sizeScale ?? DEFAULT_ELEMENT_CONFIGS.defaultCategory.trash.sizeScale;
       const trashSize = cellSizeVal * sizeScale;
-      const cy2 = cy + cellSizeVal * yOffset; 
+      const cy2 = cy + cellSizeVal * yOffset;
       const trashImg = imagesRef.current[t.item.id];
 
       ctx.save();
@@ -681,7 +681,7 @@ export default function GridMap({
         ctx.font = `${Math.min(trashSize * 0.8, 36)}px sans-serif`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(t.item.emoji, cx2, cy2);
+        ctx.fillText(t.item.name, cx2, cy2);
       }
       ctx.restore();
     });
@@ -751,7 +751,7 @@ export default function GridMap({
       const yOffset = canConfig.yOffset ?? DEFAULT_ELEMENT_CONFIGS.defaultCategory.trashCan.yOffset;
       const sizeScale = canConfig.sizeScale ?? DEFAULT_ELEMENT_CONFIGS.defaultCategory.trashCan.sizeScale;
       const canSize = cellSizeVal * sizeScale;
-      const cy2 = cy + cellSizeVal * yOffset; 
+      const cy2 = cy + cellSizeVal * yOffset;
 
       const isDumping = tc.type === activeDumpingCanType;
       const sheetKey = `can${tc.type}_sheet`;
@@ -784,7 +784,7 @@ export default function GridMap({
           ctx.font = `${Math.min(canSize * 0.6, 40)}px sans-serif`;
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
-          ctx.fillText(tc.emoji, cx2, cy2);
+          ctx.fillText(tc.label, cx2, cy2);
         }
       }
       ctx.restore();
@@ -1117,7 +1117,7 @@ export default function GridMap({
         {hoveredCanType && hoveredCanPos && TRASH_CAN_HOVER_IMAGES[hoveredCanType] && (() => {
           const hoverImg = TRASH_CAN_HOVER_IMAGES[hoveredCanType];
           const containerW = containerSizeRef.current.width || 800;
-          
+
           // Tooltip position centered horizontally on the trash can (allowed to exceed container)
           const posX = hoveredCanPos.x;
 
@@ -1198,7 +1198,7 @@ export default function GridMap({
                                     className={`${isMobile ? "w-4 h-4" : "w-4 h-4 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5"} object-contain drop-shadow-xs`}
                                   />
                                 ) : (
-                                  <span className="text-xs sm:text-base leading-none">{item.emoji}</span>
+                                  <span className="text-xs sm:text-base leading-none">{item.name}</span>
                                 )}
                                 <span className={`absolute -top-1 -right-1 bg-amber-600 text-white font-extrabold ${isMobile ? "text-[6.5px] w-2.5 h-2.5" : "text-[8px] w-3 h-3 sm:w-3.5 sm:h-3.5"} rounded-full flex items-center justify-center shadow-xs`}>
                                   {discardNum}
@@ -1272,7 +1272,6 @@ export default function GridMap({
               >
                 <div className="flex items-center justify-between pb-1.5 border-b border-amber-200">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-base">🎒</span>
                     <span className="font-extrabold text-xs sm:text-sm text-amber-950 font-heading">
                       Keterangan Urutan Buang Sampah
                     </span>
@@ -1288,7 +1287,7 @@ export default function GridMap({
                 </div>
 
                 <div className="text-[10px] sm:text-xs leading-relaxed text-stone-700 bg-amber-50/80 p-2 rounded-lg border border-amber-200/80">
-                  <div className="font-bold text-amber-900 mb-0.5">📌 Aturan Tumpukan (LIFO / Stack):</div>
+                  <div className="font-bold text-amber-900 mb-0.5"> Aturan Tumpukan (LIFO / Stack):</div>
                   Sampah yang <strong>terakhir diambil</strong> berada di bagian <strong>teratas tas</strong> dan <strong>wajib dibuang lebih dulu</strong> saat perintah <strong>BUANG</strong> dijalankan.
                 </div>
 
@@ -1320,7 +1319,7 @@ export default function GridMap({
                                 {item.image ? (
                                   <img src={item.image} alt={item.name} className="w-4 h-4 object-contain" />
                                 ) : (
-                                  <span>{item.emoji}</span>
+                                  <span>{item.name}</span>
                                 )}
                                 <span>{item.name}</span>
                               </div>

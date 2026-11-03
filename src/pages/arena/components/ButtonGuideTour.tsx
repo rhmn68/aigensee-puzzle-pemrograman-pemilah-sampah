@@ -8,21 +8,20 @@ interface ButtonGuideTourProps {
 
 interface TourStep {
   targetId: string;
-  emoji: string;
-  title: string;
+    title: string;
   desc: string;
 }
 
 // Urutan pengenalan tombol — sesuai tombol asli di CommandPanel (arena)
 const STEPS: TourStep[] = [
-  { targetId: 'add-btn-RIGHT',  emoji: '➡️', title: 'Tombol KANAN',  desc: 'Menggerakkan Petugas Sampah 1 petak ke kanan.' },
-  { targetId: 'add-btn-LEFT',   emoji: '⬅️', title: 'Tombol KIRI',   desc: 'Menggerakkan Petugas Sampah 1 petak ke kiri.' },
-  { targetId: 'add-btn-UP',     emoji: '⬆️', title: 'Tombol LONCAT', desc: 'Petugas melompat untuk melewati rintangan batu 🪨 di jalan.' },
-  { targetId: 'add-btn-PICK',   emoji: '✋', title: 'Tombol AMBIL',  desc: 'Mengambil sampah yang ada di petak yang sama, lalu memasukkannya ke tas.' },
-  { targetId: 'add-btn-DROP',   emoji: '🗑️', title: 'Tombol BUANG',  desc: 'Membuang sampah paling atas dari tas ke tong di depan petugas.' },
-  { targetId: 'add-btn-RESET',  emoji: '🔄', title: 'Tombol ULANG',  desc: 'Mengatur ulang level dan menghapus semua langkah yang sudah disusun.' },
-  { targetId: 'run-execution-btn', emoji: '▶️', title: 'Tombol MULAI', desc: 'Menjalankan semua langkah yang sudah kamu susun secara berurutan.' },
-  { targetId: 'instructions-dropzone-scrollable', emoji: '📋', title: 'Area Program', desc: 'Setiap tombol yang kamu klik akan muncul di sini sebagai urutan langkah.' },
+  { targetId: 'add-btn-RIGHT',  title: 'Tombol KANAN',  desc: 'Menggerakkan Petugas Sampah 1 petak ke kanan.' },
+  { targetId: 'add-btn-LEFT',   title: 'Tombol KIRI',   desc: 'Menggerakkan Petugas Sampah 1 petak ke kiri.' },
+  { targetId: 'add-btn-UP',     title: 'Tombol LONCAT', desc: 'Petugas melompat untuk melewati rintangan batu di jalan.' },
+  { targetId: 'add-btn-PICK',   title: 'Tombol AMBIL',  desc: 'Mengambil sampah yang ada di petak yang sama, lalu memasukkannya ke tas.' },
+  { targetId: 'add-btn-DROP',   title: 'Tombol BUANG',  desc: 'Membuang sampah paling atas dari tas ke tong di depan petugas.' },
+  { targetId: 'add-btn-RESET',  title: 'Tombol ULANG',  desc: 'Mengatur ulang level dan menghapus semua langkah yang sudah disusun.' },
+  { targetId: 'run-execution-btn', title: 'Tombol MULAI', desc: 'Menjalankan semua langkah yang sudah kamu susun secara berurutan.' },
+  { targetId: 'instructions-dropzone-scrollable', title: 'Area Program', desc: 'Setiap tombol yang kamu klik akan muncul di sini sebagai urutan langkah.' },
 ];
 
 interface Rect { top: number; left: number; width: number; height: number; }
@@ -157,7 +156,6 @@ export default function ButtonGuideTour({ isOpen, onClose, playSound }: ButtonGu
         </div>
 
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-2xl">{step.emoji}</span>
           <h3 className="font-extrabold text-stone-800 text-base font-heading">{step.title}</h3>
         </div>
         <p className="text-[13px] text-stone-600 font-sans leading-relaxed mb-3">{step.desc}</p>

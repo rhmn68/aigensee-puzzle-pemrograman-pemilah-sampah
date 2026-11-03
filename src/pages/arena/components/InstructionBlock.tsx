@@ -26,19 +26,19 @@ export default function InstructionBlock({
   const getBlockConfig = (type: string) => {
     switch (type) {
       case 'UP':
-        return { emoji: '⬆️', label: 'LONCAT' };
+        return { label: 'LONCAT' };
       case 'DOWN':
-        return { emoji: '⬇️', label: 'BAWAH' };
+        return { label: 'BAWAH' };
       case 'LEFT':
-        return { emoji: '⬅️', label: 'KIRI' };
+        return { label: 'KIRI' };
       case 'RIGHT':
-        return { emoji: '➡️', label: 'KANAN' };
+        return { label: 'KANAN' };
       case 'PICK':
-        return { emoji: '👐', label: 'AMBIL' };
+        return { label: 'AMBIL' };
       case 'DROP':
-        return { emoji: '🗑️', label: 'BUANG' };
+        return { label: 'BUANG' };
       default:
-        return { emoji: '❓', label: 'BLOK' };
+        return { label: 'BLOK' };
     }
   };
 
@@ -96,7 +96,7 @@ export default function InstructionBlock({
       >
         {/* White Card Background rx="9.09" matching tombol-atas.svg */}
         <rect x="7.46" y="5.99" width="51" height="51" rx="9.09" ry="9.09" fill="#ffffff" />
-        
+
         {/* Icon Glyph Paths */}
         {type === 'UP' && (
           <path fill="#5b5b5b" d="M39.49,26.24h-2.34v20.31c0,.7-.56,1.26-1.26,1.26h-5.84c-.7,0-1.26-.57-1.26-1.26v-20.31h-2.34c-1.04,0-1.64-1.2-1-2.03l6.52-8.55c.51-.66,1.5-.66,2.01,0l6.52,8.55c.63.83.04,2.03-1,2.03Z"/>

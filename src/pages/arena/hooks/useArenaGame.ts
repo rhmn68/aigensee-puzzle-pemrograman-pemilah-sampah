@@ -158,7 +158,7 @@ export function useArenaGame(
     activeTrashRef.current = trash;
     setLogs([
       `[Sistem] Memuat Level ${level.id}: ${level.name}`,
-      `[Sistem] Petugas Sampah siap! 🤖`,
+      `[Sistem] Petugas Sampah siap!`,
       `[Sistem] Susun program untuk mengendalikan Petugas Sampah.`
     ]);
     setGameResult(null);
@@ -169,12 +169,12 @@ export function useArenaGame(
   // Helper labels
   const getIndonesianLabel = (action: CommandAction) => {
     switch (action) {
-      case 'UP': return 'Atas ⬆️';
-      case 'DOWN': return 'Bawah ⬇️';
-      case 'LEFT': return 'Kiri ⬅️';
-      case 'RIGHT': return 'Kanan ➡️';
-      case 'PICK': return 'Ambil Sampah 👐';
-      case 'DROP': return 'Buang Sampah 🗑️';
+      case 'UP': return 'Atas';
+      case 'DOWN': return 'Bawah';
+      case 'LEFT': return 'Kiri';
+      case 'RIGHT': return 'Kanan';
+      case 'PICK': return 'Ambil Sampah';
+      case 'DROP': return 'Buang Sampah';
       default: return '';
     }
   };
@@ -438,7 +438,7 @@ export function useArenaGame(
       setShowResultModal(true);
       setLogs(prev => [
         ...prev, '',
-        `[Pilah Sukses] SELAMAT! Taman bersih! Total ${codeSizeUsed} langkah karakter! 🎉`,
+        `[Pilah Sukses] SELAMAT! Taman bersih! Total ${codeSizeUsed} langkah karakter!`,
         `[Pilah Sukses] Peringkat: ${stars} / 3 Bintang.`
       ]);
       onSaveHighScore(level.id, stars, codeSizeUsed);
@@ -597,7 +597,7 @@ export function useArenaGame(
               currentTrash[foundIdx] = { ...targetTrash, collected: true };
               physics.backpack = [...physics.backpack, targetTrash.item];
               character.backpack = [...character.backpack, targetTrash.item];
-              newLogs.push(`[Aksi] ${characterLabel} langkah ${stepNum}: Mengambil "${targetTrash.item.name}" ${targetTrash.item.emoji}.`);
+              newLogs.push(`[Aksi] ${characterLabel} langkah ${stepNum}: Mengambil "${targetTrash.item.name}".`);
             }
           }
 
@@ -629,7 +629,7 @@ export function useArenaGame(
                   physics.isDumping = false;
                   physics.dumpingCanType = null;
                   playSound('fail');
-                  newLogs.push(`[Aksi Gagal] ${characterLabel} langkah ${stepNum}: Sampah teratas di tas ("${lastPickedItem.name}" ${lastPickedItem.emoji}) tidak cocok dengan Tong ${foundCan.label} ${foundCan.emoji}! (Sampah yang terakhir diambil harus dibuang lebih dulu)`);
+                  newLogs.push(`[Aksi Gagal] ${characterLabel} langkah ${stepNum}: Sampah teratas di tas ("${lastPickedItem.name}") tidak cocok dengan Tong ${foundCan.label}! (Sampah yang terakhir diambil harus dibuang lebih dulu)`);
                 }
               } else {
                 // Empty backpack: do NOT trigger character or trash can dump animation!
@@ -662,7 +662,7 @@ export function useArenaGame(
                 const droppedItem = updatedBackpack.pop();
                 physics.backpack = updatedBackpack;
                 character.backpack = updatedBackpack;
-                newLogs.push(`[Pilah Sukses] ${characterLabel} langkah ${stepNum}: Membuang "${droppedItem.name}" ${droppedItem.emoji} (Sampah teratas tas / terakhir diambil) ke Tong ${foundCan.label} ${foundCan.emoji}!`);
+                newLogs.push(`[Pilah Sukses] ${characterLabel} langkah ${stepNum}: Membuang "${droppedItem.name}" (Sampah teratas tas / terakhir diambil) ke Tong ${foundCan.label}!`);
               }
             }
           }

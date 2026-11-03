@@ -141,9 +141,6 @@ export default function App() {
     return (
       <div className="h-screen w-screen overflow-hidden relative flex flex-col items-center justify-center bg-gradient-to-b from-[#E0F2FE] via-[#FEF8F0] to-[#DCFCE7] p-6 select-none">
         <div className="max-w-sm w-full bg-[#FEF8F0] border-2 border-[#EED4B7] rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col items-center text-center">
-          <div className="w-16 h-16 rounded-2xl bg-emerald-100 border border-emerald-300 flex items-center justify-center text-3xl mb-4 animate-bounce">
-            ♻️
-          </div>
           <h2 className="text-base sm:text-lg font-extrabold text-amber-950 mb-1">
             Memuat Aset Permainan...
           </h2>
@@ -168,17 +165,11 @@ export default function App() {
       {showFullscreenPrompt && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-amber-950/30 backdrop-blur-md p-4 select-none animate-fadeIn">
           <div className="relative max-w-sm w-full mx-auto bg-[#FEF8F0] border-2 border-[#EED4B7] shadow-2xl rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center">
-            <div className="relative flex items-center justify-center mb-6">
-              <div className="absolute w-20 h-20 bg-[#00ADEF]/20 rounded-full animate-ping opacity-75" />
-              <div className="w-16 h-16 bg-[#00ADEF]/10 border border-[#00ADEF]/30 rounded-2xl flex items-center justify-center text-3xl shadow-sm z-10">
-                📺
-              </div>
-            </div>
 
             <h3 className="text-lg sm:text-xl font-extrabold text-amber-950 tracking-tight mb-2">
               Mode Layar Penuh
             </h3>
-            
+
             <p className="text-xs sm:text-sm text-stone-600 font-medium leading-relaxed mb-6">
               Apakah Anda ingin masuk ke mode layar penuh?
             </p>
@@ -191,7 +182,7 @@ export default function App() {
               >
                 Yes
               </button>
-              
+
               <button
                 type="button"
                 onClick={() => {

@@ -8,8 +8,8 @@
  * • Level 3: 24 Langkah (threeStarThreshold: 24)
  * (Level makin besar, jumlah langkah bertambah secara konsisten dan progresif: 18 -> 21 -> 24)
  * 
- * 🌐 Live URL Demo: https://glenrioariesto.github.io/puzzle-pemrograman-pemilah-sampah-v2/
- * 📂 Repository: https://github.com/glenrioariesto/puzzle-pemrograman-pemilah-sampah-v2
+ *  Live URL Demo: https://glenrioariesto.github.io/puzzle-pemrograman-pemilah-sampah-v2/
+ *  Repository: https://github.com/glenrioariesto/puzzle-pemrograman-pemilah-sampah-v2
  */
 
 import { CommandAction, TrashType } from './types';

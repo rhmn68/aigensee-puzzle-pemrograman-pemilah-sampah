@@ -17,15 +17,15 @@ import svgLampu from '../assets/lampu.svg';
 import svgSayur from '../assets/sayur.svg';
 
 export const TRASH_ITEMS: { [key: string]: TrashItem } = {
-  banana:      { id: 'banana',      name: 'Kulit Pisang',   type: 'ORGANIC',    emoji: '🍌', color: 'text-emerald-500', image: svgKulitPisang },
-  sayur:       { id: 'sayur',       name: 'Sayur',          type: 'ORGANIC',    emoji: '🥬', color: 'text-emerald-500', image: svgSayur },
-  apple:       { id: 'apple',       name: 'Apel',           type: 'ORGANIC',    emoji: '🍎', color: 'text-emerald-500', image: svgApel },
-  can:         { id: 'can',         name: 'Kaleng Minuman', type: 'RECYCLABLE', emoji: '🥤', color: 'text-amber-500',   image: svgKalengMinuman },
-  botolAir:    { id: 'botolAir',    name: 'Botol Air',      type: 'RECYCLABLE', emoji: '🧴', color: 'text-amber-500',   image: svgBotolAir },
-  kertasKoran: { id: 'kertasKoran', name: 'Kertas Koran',   type: 'RECYCLABLE', emoji: '📰', color: 'text-amber-500',   image: svgKertasKoran },
-  battery:     { id: 'battery',     name: 'Baterai Bekas',  type: 'B3',         emoji: '🔋', color: 'text-red-500',     image: svgBaterai },
-  kalengBesi:  { id: 'kalengBesi',  name: 'Kaleng Besi',    type: 'B3',         emoji: '🥫', color: 'text-red-500',     image: svgKalengBesi },
-  bulb:        { id: 'bulb',        name: 'Bohlam Lampu',   type: 'B3',         emoji: '💡', color: 'text-red-500',     image: svgLampu },
+  banana:      { id: 'banana',      name: 'Kulit Pisang',   type: 'ORGANIC',    color: 'text-emerald-500', image: svgKulitPisang },
+  sayur:       { id: 'sayur',       name: 'Sayur',          type: 'ORGANIC',    color: 'text-emerald-500', image: svgSayur },
+  apple:       { id: 'apple',       name: 'Apel',           type: 'ORGANIC',    color: 'text-emerald-500', image: svgApel },
+  can:         { id: 'can',         name: 'Kaleng Minuman', type: 'RECYCLABLE', color: 'text-amber-500',   image: svgKalengMinuman },
+  botolAir:    { id: 'botolAir',    name: 'Botol Air',      type: 'RECYCLABLE', color: 'text-amber-500',   image: svgBotolAir },
+  kertasKoran: { id: 'kertasKoran', name: 'Kertas Koran',   type: 'RECYCLABLE', color: 'text-amber-500',   image: svgKertasKoran },
+  battery:     { id: 'battery',     name: 'Baterai Bekas',  type: 'B3',         color: 'text-red-500',     image: svgBaterai },
+  kalengBesi:  { id: 'kalengBesi',  name: 'Kaleng Besi',    type: 'B3',         color: 'text-red-500',     image: svgKalengBesi },
+  bulb:        { id: 'bulb',        name: 'Bohlam Lampu',   type: 'B3',         color: 'text-red-500',     image: svgLampu },
 };
 
 // ─── Fixed layout — identical across ALL levels ───────────────────────────────
@@ -36,9 +36,9 @@ const FIXED_CHARACTERS: Character[] = [
 
 // Trash cans side-by-side on the bottom floor (y=3) at the right edge
 const FIXED_TRASH_CANS = [
-  { pos: { x: 13, y: 3 }, type: 'ORGANIC'    as const, label: 'Organik',    color: 'bg-emerald-600 border-emerald-500 text-white', emoji: '🟩' },
-  { pos: { x: 14, y: 3 }, type: 'RECYCLABLE' as const, label: 'Daur Ulang', color: 'bg-amber-500 border-amber-400 text-white',     emoji: '🟨' },
-  { pos: { x: 15, y: 3 }, type: 'B3'         as const, label: 'B3',         color: 'bg-red-600 border-red-500 text-white',          emoji: '🟥' },
+  { pos: { x: 13, y: 3 }, type: 'ORGANIC'    as const, label: 'Organik',    color: 'bg-emerald-600 border-emerald-500 text-white', },
+  { pos: { x: 14, y: 3 }, type: 'RECYCLABLE' as const, label: 'Daur Ulang', color: 'bg-amber-500 border-amber-400 text-white',     },
+  { pos: { x: 15, y: 3 }, type: 'B3'         as const, label: 'B3',         color: 'bg-red-600 border-red-500 text-white',          },
 ];
 
 export const LEVELS: GameLevel[] = [
@@ -56,15 +56,15 @@ export const LEVELS: GameLevel[] = [
     ],
     trashCans: FIXED_TRASH_CANS,
     obstacles: [
-      { pos: { x: 5, y: 3 }, type: 'rock', emoji: '🪨' },
+      { pos: { x: 5, y: 3 }, type: 'rock', },
     ],
     maxCapacity: 2,
     maxInstructions: 30,
     starsThreshold: { three: 18, two: 22 },
     hints: [
-      "1. Gunakan perintah LONCAT (tombol ATAS) saat di x=4 untuk melompati batu 🪨 di x=5.",
-      "2. Aturan Tumpukan: Karena Kaleng Minuman 🥤 diambil TERAKHIR (x=7), Kaleng Minuman ada di paling atas tas. Buang Kaleng Minuman dulu ke Tong Kuning (x=14)!",
-      "3. Setelah Kaleng Minuman terbuang, baru buang Apel 🍎 ke Tong Hijau (x=13).",
+      "1. Gunakan perintah LONCAT (tombol ATAS) saat di x=4 untuk melompati batu di x=5.",
+      "2. Aturan Tumpukan: Karena Kaleng Minuman diambil TERAKHIR (x=7), Kaleng Minuman ada di paling atas tas. Buang Kaleng Minuman dulu ke Tong Kuning (x=14)!",
+      "3. Setelah Kaleng Minuman terbuang, baru buang Apel ke Tong Hijau (x=13).",
     ],
     ctInsights: {
       decomposition: "Ambil Apel (3) → Loncat Batu (5) → Ambil Kaleng Minuman (7) → Jalan ke Tong Kuning (14) buang Kaleng Minuman → Mundur ke Tong Hijau (13) buang Apel.",
@@ -78,7 +78,7 @@ export const LEVELS: GameLevel[] = [
   {
     id: 2,
     name: "2. Tiga Jenis Sampah & Urutan Tumpukan",
-    description: "Ambil 3 jenis sampah (Apel, Kaleng Minuman, dan Baterai Bekas) sambil melompati rintangan batu 🪨! Karena urutan ambil adalah Apel -> Kaleng Minuman -> Baterai Bekas, maka Baterai Bekas berada di paling atas tas!",
+    description: "Ambil 3 jenis sampah (Apel, Kaleng Minuman, dan Baterai Bekas) sambil melompati rintangan batu! Karena urutan ambil adalah Apel -> Kaleng Minuman -> Baterai Bekas, maka Baterai Bekas berada di paling atas tas!",
     gridSize: { width: 16, height: 4 },
     characters: FIXED_CHARACTERS,
     startPos: { x: 0, y: 3 },
@@ -89,15 +89,15 @@ export const LEVELS: GameLevel[] = [
     ],
     trashCans: FIXED_TRASH_CANS,
     obstacles: [
-      { pos: { x: 5, y: 3 }, type: 'rock', emoji: '🪨' },
-      { pos: { x: 9, y: 3 }, type: 'rock', emoji: '🪨' },
+      { pos: { x: 5, y: 3 }, type: 'rock', },
+      { pos: { x: 9, y: 3 }, type: 'rock', },
     ],
     maxCapacity: 3,
     maxInstructions: 35,
     starsThreshold: { three: 21, two: 25 },
     hints: [
-      "1. Lompati batu 🪨 di x=5 dan x=9 menggunakan tombol LONCAT.",
-      "2. Urutan tumpukan di tas: [Bawah: Apel 🍎 | Tengah: Kaleng Minuman 🥤 | Atas: Baterai Bekas 🔋].",
+      "1. Lompati batu di x=5 dan x=9 menggunakan tombol LONCAT.",
+      "2. Urutan tumpukan di tas: [Bawah: Apel | Tengah: Kaleng Minuman | Atas: Baterai Bekas].",
       "3. Urutan membuang yang benar: Buang Baterai Bekas ke Tong Merah (x=15) → Buang Kaleng Minuman ke Tong Kuning (x=14) → Buang Apel ke Tong Hijau (x=13).",
     ],
     ctInsights: {
@@ -124,9 +124,9 @@ export const LEVELS: GameLevel[] = [
     ],
     trashCans: FIXED_TRASH_CANS,
     obstacles: [
-      { pos: { x: 2, y: 3 }, type: 'rock', emoji: '🪨' },
-      { pos: { x: 5, y: 3 }, type: 'rock', emoji: '🪨' },
-      { pos: { x: 9, y: 3 }, type: 'rock', emoji: '🪨' },
+      { pos: { x: 2, y: 3 }, type: 'rock', },
+      { pos: { x: 5, y: 3 }, type: 'rock', },
+      { pos: { x: 9, y: 3 }, type: 'rock', },
     ],
     maxCapacity: 4,
     maxInstructions: 45,

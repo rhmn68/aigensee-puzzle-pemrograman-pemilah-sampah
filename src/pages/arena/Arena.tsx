@@ -148,7 +148,7 @@ export default function Arena({
   const handleDevAutoSolve = () => {
     playSound('click');
     const levelId = level.id;
-    
+
     // Helper to generate instructions with random unique IDs
     const createInstructions = (actions: CommandAction[]): Instruction[] => {
       return actions.map(act => ({ id: Math.random().toString(36).substring(2, 9), type: act }));
@@ -211,7 +211,7 @@ export default function Arena({
         className="hidden fixed bottom-3 left-3 z-50 px-3 py-2 bg-indigo-650 hover:bg-indigo-600 border border-indigo-700 text-white text-[11px] font-bold rounded-xl shadow-md cursor-pointer transition-all items-center gap-1.5 active:scale-95 hover:scale-[1.02] opacity-40 hover:opacity-100"
         title="Auto-fill correct steps for this level"
       >
-        🛠️ Dev Auto-Solve
+         Dev Auto-Solve
       </button>
 
       {/* Main Core Layout Body */}

@@ -9,7 +9,6 @@ export interface TrashItem {
   id: string;
   name: string;
   type: TrashType;
-  emoji: string;
   color: string; // Tailwind class background or text
   image?: string;
 }
@@ -31,13 +30,11 @@ export interface TrashCanOnGrid {
   type: TrashType;
   label: string;
   color: string; // Tailwind bg
-  emoji: string;
 }
 
 export interface ObstacleOnGrid {
   pos: GridPos;
   type: 'bush' | 'rock' | 'wall' | 'water';
-  emoji: string;
 }
 
 export type CharacterId = 'ORGANIC' | 'RECYCLABLE' | 'B3';

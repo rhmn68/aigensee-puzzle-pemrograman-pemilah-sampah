@@ -42,7 +42,7 @@ export default function BlockPalette({
     <div className="bg-[#FAF5EE] rounded-3xl p-3 border border-[#EED4B7] shadow-sm flex flex-col gap-2">
       <div className="flex items-center justify-between">
         <span className="text-[11px] font-extrabold text-stone-700 uppercase tracking-wider font-mono flex items-center gap-1.5">
-          <span>📦</span> PALET BLOK KODE
+          PALET BLOK KODE
         </span>
         <span className="text-[10px] text-stone-600 font-sans font-bold">
           Klik atau Drag blok ke area penyusunan

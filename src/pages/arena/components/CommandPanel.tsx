@@ -262,7 +262,7 @@ export default function CommandPanel({
     for (let i = 0; i < snap.length; i++) {
       const centerX = snap[i].left + snap[i].width / 2;
       const centerY = snap[i].top + snap[i].height / 2;
-      
+
       const dx = draggedCenterX - centerX;
       const dy = draggedCenterY - centerY;
       const dist = dx * dx + dy * dy;
@@ -552,7 +552,6 @@ export default function CommandPanel({
           >
             {instructions.length === 0 ? (
               <div className="h-full min-h-[60px] lg:min-h-[180px] [@media(max-height:740px)]:lg:min-h-[100px] flex flex-col items-center justify-center text-center p-1.5 lg:p-6 select-none w-full">
-                <span className="text-xl sm:text-3xl mb-1 sm:mb-2.5">📂</span>
                 <p className="font-bold text-[9px] sm:text-xs text-amber-955">Program Kosong</p>
                 <p className="hidden sm:block text-[10px] text-gray-500 mt-1 max-w-[200px] leading-relaxed mx-auto">
                   Pilih instruksi di samping untuk mulai.
@@ -654,7 +653,6 @@ export default function CommandPanel({
                 className="w-full mt-0.5 py-1.5 px-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 active:scale-95 text-white font-extrabold text-[10px] sm:text-xs flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer"
                 id="tooltip-delete-step-btn"
               >
-                <span>🗑️</span>
                 <span>Hapus Langkah Ini</span>
               </button>
             </div>
@@ -663,7 +661,6 @@ export default function CommandPanel({
           {/* Drag out to delete overlay badge */}
           {draggedIndex !== null && isOutside && (
             <div className="absolute inset-0 bg-rose-50/95 border-2 border-dashed border-rose-500/80 rounded-2xl flex flex-col items-center justify-center text-rose-600 font-bold p-4 animate-pulse shadow-md z-20">
-              <span className="text-2xl mb-1.5">🗑️</span>
               <span className="text-xs uppercase tracking-wider font-sans">Lepas untuk Hapus Blok</span>
             </div>
           )}

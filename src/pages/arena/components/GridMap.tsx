@@ -1247,7 +1247,7 @@ export default function GridMap({
 
               {/* In-Game Audio Toggle Button */}
               {onToggleMute && (
-                <button id="arena-audio-toggle" type="button" onClick={onToggleMute} className={`${isMobile ? "w-6.5 h-6.5 rounded-md" : "w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-lg sm:rounded-xl"} flex items-center justify-center bg-white/90 hover:bg-white border border-[#EED4B7] shadow-sm cursor-pointer transition-colors active:scale-95 flex-shrink-0`} title={isMuted ? "Nyalakan Musik / Suara" : "Matikan Musik / Suara"}>
+                <button id="arena-audio-toggle" type="button" onClick={onToggleMute} className={`${isMobile ? "w-6.5 h-6.5 rounded-md" : "w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-lg sm:rounded-xl"} flex items-center justify-center bg-white/90 hover:bg-white border border-[#EED4B7] shadow-sm cursor-pointer transition-colors active:scale-95 flex-shrink-0`} title={isMuted ? "Nyalakan Musik/Suara" : "Matikan Musik/Suara"}>
                   {isMuted ? (
                     <VolumeX className={`${isMobile ? "w-4 h-4" : "w-4 h-4 sm:w-5 sm:h-5 md:w-5.5 md:h-5.5"} text-rose-500`} />
                   ) : (
@@ -1287,8 +1287,8 @@ export default function GridMap({
                 </div>
 
                 <div className="text-[10px] sm:text-xs leading-relaxed text-stone-700 bg-amber-50/80 p-2 rounded-lg border border-amber-200/80">
-                  <div className="font-bold text-amber-900 mb-0.5"> Aturan Tumpukan (LIFO / Stack):</div>
-                  Sampah yang <strong>terakhir diambil</strong> berada di bagian <strong>teratas tas</strong> dan <strong>wajib dibuang lebih dulu</strong> saat perintah <strong>BUANG</strong> dijalankan.
+                  <div className="font-bold text-amber-900 mb-0.5"> Aturan Tumpukan (LIFO/Stack):</div>
+                  Sampah yang <strong>terakhir diambil</strong> berada di bagian <strong>teratas tas</strong> dan <strong>wajib dibuang lebih dulu</strong> saat perintah <strong>Buang</strong> dijalankan.
                 </div>
 
                 {/* Dynamic Backpack Sequence */}
@@ -1332,7 +1332,7 @@ export default function GridMap({
                                   {bin?.label || item.type}
                                 </span>
                                 {isNext && (
-                                  <span className="ml-1 text-[8px] bg-red-600 text-white font-black px-1.5 py-0.5 rounded uppercase tracking-wider animate-pulse">
+                                  <span className="ml-1 text-[8px] bg-red-600 text-white font-black px-1.5 py-0.5 rounded tracking-wider animate-pulse">
                                     Dibuang #1
                                   </span>
                                 )}

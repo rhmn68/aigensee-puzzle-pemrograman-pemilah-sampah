@@ -37,8 +37,8 @@ export default function CodeWorkspace({
     >
       <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-[#EED4B7]/60">
         <div className="flex items-center gap-2">
-          <span className="text-[11px] font-extrabold text-stone-700 uppercase tracking-wider font-mono">
-             URUTAN KODE
+          <span className="text-[11px] font-extrabold text-stone-700 tracking-wider font-mono">
+             Urutan Kode
           </span>
           <span className="text-[10px] bg-amber-100 text-amber-800 font-mono font-bold px-2 py-0.5 rounded-full border border-amber-200">
             {instructions.length} Blok
@@ -67,10 +67,11 @@ export default function CodeWorkspace({
             </p>
           </div>
         ) : (
-          instructions.map((inst) => (
+          instructions.map((inst, index) => (
             <InstructionBlock
               key={inst.id}
               instruction={inst}
+              stepNumber={index + 1}
               activeInstructionId={activeInstructionId}
             />
           ))

@@ -69,7 +69,7 @@ export function PortraitWarning() {
         <RotateCw className="w-8 h-8 text-amber-500 absolute -top-1 -right-1 animate-spin" style={{ animationDuration: '4s' }} />
       </div>
 
-      <h2 id="portrait-warning-title" className="text-base sm:text-lg font-black tracking-wider text-white mb-2 uppercase font-sans">
+      <h2 id="portrait-warning-title" className="text-base sm:text-lg font-black tracking-wider text-white mb-2 font-sans">
         Gunakan Orientasi Lanskap (Horizontal)
       </h2>
       <p id="portrait-warning-desc" className="text-xs sm:text-sm text-slate-300 max-w-xs leading-relaxed font-sans mb-6">

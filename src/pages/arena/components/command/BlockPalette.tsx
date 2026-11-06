@@ -19,10 +19,10 @@ interface BlockPaletteProps {
 const COMMAND_BUTTONS: { action: CommandAction; label: string; img: string; hotkey: string }[] = [
   { action: 'UP', label: 'MAJU (W)', img: imgAtas, hotkey: 'W' },
   { action: 'DOWN', label: 'MUNDUR (S)', img: imgBawah, hotkey: 'S' },
-  { action: 'LEFT', label: 'KIRI (A)', img: imgKiri, hotkey: 'A' },
-  { action: 'RIGHT', label: 'KANAN (D)', img: imgKanan, hotkey: 'D' },
-  { action: 'PICK', label: 'AMBIL (E)', img: imgAmbil, hotkey: 'E' },
-  { action: 'DROP', label: 'BUANG (Q)', img: imgBuang, hotkey: 'Q' },
+  { action: 'LEFT', label: 'Kiri (A)', img: imgKiri, hotkey: 'A' },
+  { action: 'RIGHT', label: 'Kanan (D)', img: imgKanan, hotkey: 'D' },
+  { action: 'PICK', label: 'Ambil (E)', img: imgAmbil, hotkey: 'E' },
+  { action: 'DROP', label: 'Buang (Q)', img: imgBuang, hotkey: 'Q' },
 ];
 
 export default function BlockPalette({
@@ -41,8 +41,8 @@ export default function BlockPalette({
   return (
     <div className="bg-[#FAF5EE] rounded-3xl p-3 border border-[#EED4B7] shadow-sm flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <span className="text-[11px] font-extrabold text-stone-700 uppercase tracking-wider font-mono flex items-center gap-1.5">
-          PALET BLOK KODE
+        <span className="text-[11px] font-extrabold text-stone-700 tracking-wider font-mono flex items-center gap-1.5">
+          Palet Blok Kode
         </span>
         <span className="text-[10px] text-stone-600 font-sans font-bold">
           Klik atau Drag blok ke area penyusunan

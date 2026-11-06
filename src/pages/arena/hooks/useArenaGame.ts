@@ -438,8 +438,8 @@ export function useArenaGame(
       setShowResultModal(true);
       setLogs(prev => [
         ...prev, '',
-        `[Pilah Sukses] SELAMAT! Taman bersih! Total ${codeSizeUsed} langkah karakter!`,
-        `[Pilah Sukses] Peringkat: ${stars} / 3 Bintang.`
+        `[Pilah Sukses] Selamat! Taman bersih! Total ${codeSizeUsed} langkah karakter!`,
+        `[Pilah Sukses] Peringkat: ${stars}/3 Bintang.`
       ]);
       onSaveHighScore(level.id, stars, codeSizeUsed);
     }
@@ -662,7 +662,7 @@ export function useArenaGame(
                 const droppedItem = updatedBackpack.pop();
                 physics.backpack = updatedBackpack;
                 character.backpack = updatedBackpack;
-                newLogs.push(`[Pilah Sukses] ${characterLabel} langkah ${stepNum}: Membuang "${droppedItem.name}" (Sampah teratas tas / terakhir diambil) ke Tong ${foundCan.label}!`);
+                newLogs.push(`[Pilah Sukses] ${characterLabel} langkah ${stepNum}: Membuang "${droppedItem.name}" (Sampah teratas tas/terakhir diambil) ke Tong ${foundCan.label}!`);
               }
             }
           }

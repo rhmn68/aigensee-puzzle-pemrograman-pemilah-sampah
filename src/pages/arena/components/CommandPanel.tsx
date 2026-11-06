@@ -539,6 +539,9 @@ export default function CommandPanel({
             </div>
           )}
 
+          <p className="text-[8px] sm:text-[10px] text-stone-600 font-sans px-2 pt-0.5 pb-1.5 shrink-0">
+            Baca dari kiri ke kanan, lalu lanjut ke baris bawah. Ikuti nomor langkah.
+          </p>
           <div 
             ref={containerRef}
             onScroll={() => {
@@ -584,6 +587,8 @@ export default function CommandPanel({
                   >
                     <InstructionBlock
                       instruction={inst}
+                      stepNumber={index + 1}
+                      isCompleted={isExecuting && instructions.findIndex(step => step.id === activeInstructionId) > index}
                       activeInstructionId={activeInstructionId}
                       isDragged={isDragged}
                       isOutside={isOutside}
@@ -618,7 +623,7 @@ export default function CommandPanel({
               </div>
 
               <div className="flex flex-col gap-1">
-                <span className="text-[9px] sm:text-[10px] font-bold text-stone-600 uppercase tracking-wider">
+                <span className="text-[9px] sm:text-[10px] font-bold text-stone-600 tracking-wider">
                   Ganti Langkah:
                 </span>
                 <div className="grid grid-cols-5 gap-1">
@@ -661,7 +666,7 @@ export default function CommandPanel({
           {/* Drag out to delete overlay badge */}
           {draggedIndex !== null && isOutside && (
             <div className="absolute inset-0 bg-rose-50/95 border-2 border-dashed border-rose-500/80 rounded-2xl flex flex-col items-center justify-center text-rose-600 font-bold p-4 animate-pulse shadow-md z-20">
-              <span className="text-xs uppercase tracking-wider font-sans">Lepas untuk Hapus Blok</span>
+              <span className="text-xs tracking-wider font-sans">Lepas untuk Hapus Blok</span>
             </div>
           )}
 
@@ -669,7 +674,7 @@ export default function CommandPanel({
           <div className={`${isMobile ? "mt-0.5 pt-0.5" : "mt-0.5 md:mt-4 pt-0.5 md:pt-3"} border-t border-[#EED4B7] flex flex-col items-stretch gap-1 w-full min-w-0`}>
             {/* Blok badge */}
             <div className="flex flex-col sm:flex-col md:flex-row md:items-center gap-0 md:gap-1 bg-white border border-[#EED4B7] px-1.5 sm:px-2.5 py-0.5 rounded-md sm:rounded-lg shadow-sm w-full md:w-auto min-w-0">
-              <span className="text-[7px] sm:text-[9px] text-amber-900/85 uppercase font-mono tracking-widest font-bold whitespace-nowrap">Total Blok</span>
+              <span className="text-[7px] sm:text-[9px] text-amber-900/85 font-mono tracking-widest font-bold whitespace-nowrap">Total Blok</span>
               <span className={`text-[10px] sm:text-[12px] font-mono font-extrabold ${isOverBlockLimit ? 'text-rose-600 font-black animate-pulse' : 'text-amber-955'}`}>
                 {blockCount}/{level.maxInstructions}
               </span>

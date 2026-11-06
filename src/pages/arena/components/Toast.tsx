@@ -26,7 +26,7 @@ export default function Toast({ message, onClose, duration = 4000 }: ToastProps)
       <div className="flex items-start gap-2.5 sm:gap-3">
         <AlertCircle className="w-4 h-4 sm:w-5 h-5 flex-shrink-0 mt-0.5 text-rose-600 animate-pulse" />
         <div className="flex flex-col">
-          <span className="font-extrabold text-[11px] sm:text-xs uppercase tracking-wider text-rose-800">
+          <span className="font-extrabold text-[11px] sm:text-xs tracking-wider text-rose-800">
             Peringatan Kapasitas
           </span>
           <span className="text-[10px] sm:text-[11px] text-rose-700 leading-normal mt-0.5 font-medium font-sans">

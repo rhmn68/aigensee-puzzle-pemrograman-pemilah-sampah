@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { TrashItem } from '../../../types';
-import { Backpack as BackpackIcon, Sparkles } from 'lucide-react';
+import { Backpack as BackpackIcon } from 'lucide-react';
 
 interface BackpackProps {
   items: TrashItem[];
@@ -51,7 +51,7 @@ export default function Backpack({ items, capacity }: BackpackProps) {
           <h2 className="text-base font-extrabold text-amber-955 font-sans tracking-tight">Tas Punggung Sorter</h2>
         </div>
         <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 font-bold">
-          Kapasitas: {items.length} / {capacity}
+          Kapasitas: {items.length}/{capacity}
         </span>
       </div>
 
@@ -71,7 +71,7 @@ export default function Backpack({ items, capacity }: BackpackProps) {
                     {item.name}
                   </span>
                 )}
-                <span className={`absolute -bottom-1 px-1 py-0.1 border rounded text-[6px] tracking-wider font-extrabold uppercase truncate max-w-full ${getLabelColor(item.type)}`}>
+                <span className={`absolute -bottom-1 px-1 py-0.1 border rounded text-[6px] tracking-wider font-extrabold truncate max-w-full ${getLabelColor(item.type)}`}>
                   {getTypeNameInIndonesian(item.type)}
                 </span>
               </div>
@@ -96,7 +96,6 @@ export default function Backpack({ items, capacity }: BackpackProps) {
         </div>
       ) : (
         <div className="text-[10px] text-stone-600 flex items-center gap-1.5 bg-indigo-55 bg-indigo-50 border border-indigo-200 p-2.5 rounded-xl">
-          <Sparkles className="w-3.5 h-3.5 text-indigo-600 flex-shrink-0 animate-pulse" />
           <span>Karakter sedang mengangkut {items.length} jenis sampah. Pergi ke tong sampah yang serasi lalu gunakan block <b>Buang Sampah</b> .</span>
         </div>
       )}

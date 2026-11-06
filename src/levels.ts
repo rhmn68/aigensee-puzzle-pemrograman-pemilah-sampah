@@ -62,8 +62,8 @@ export const LEVELS: GameLevel[] = [
     maxInstructions: 30,
     starsThreshold: { three: 18, two: 22 },
     hints: [
-      "1. Gunakan perintah LONCAT (tombol ATAS) saat di x=4 untuk melompati batu di x=5.",
-      "2. Aturan Tumpukan: Karena Kaleng Minuman diambil TERAKHIR (x=7), Kaleng Minuman ada di paling atas tas. Buang Kaleng Minuman dulu ke Tong Kuning (x=14)!",
+      "1. Gunakan perintah Loncat (tombol Atas) saat di x=4 untuk melompati batu di x=5.",
+      "2. Aturan Tumpukan: Karena Kaleng Minuman diambil terakhir (x=7), Kaleng Minuman ada di paling atas tas. Buang Kaleng Minuman dulu ke Tong Kuning (x=14)!",
       "3. Setelah Kaleng Minuman terbuang, baru buang Apel ke Tong Hijau (x=13).",
     ],
     ctInsights: {
@@ -96,7 +96,7 @@ export const LEVELS: GameLevel[] = [
     maxInstructions: 35,
     starsThreshold: { three: 21, two: 25 },
     hints: [
-      "1. Lompati batu di x=5 dan x=9 menggunakan tombol LONCAT.",
+      "1. Lompati batu di x=5 dan x=9 menggunakan tombol Loncat.",
       "2. Urutan tumpukan di tas: [Bawah: Apel | Tengah: Kaleng Minuman | Atas: Baterai Bekas].",
       "3. Urutan membuang yang benar: Buang Baterai Bekas ke Tong Merah (x=15) → Buang Kaleng Minuman ke Tong Kuning (x=14) → Buang Apel ke Tong Hijau (x=13).",
     ],

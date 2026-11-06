@@ -7,9 +7,6 @@ import React from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import logoPusbuk from '@/assets/logo-jenama.webp?v2';
 import bgBackground from '@/assets/background.webp';
-import imgTitleTop from '@/assets/title-top.webp';
-import imgTitleBottom from '@/assets/title-bottom.webp';
-import imgButtonMulai from '@/assets/button-mulai.webp';
 
 interface SplashProps {
   onStart: () => void;
@@ -50,16 +47,9 @@ export default function Splash({ onStart, isMuted, onToggleMute }: SplashProps) 
       <div className="z-10 max-w-2xl flex flex-col items-center gap-6 animate-scale-up">
         {/* Floating container for titles to create a smooth bobbing/wiggle effect */}
         <div className="w-full flex flex-col items-center animate-float-wiggle">
-          <img 
-            src={imgTitleTop} 
-            alt="Title Top" 
-            className="w-auto max-w-sm sm:max-w-sm lg:max-w-3xl 2xl:max-w-5xl h-auto object-contain drop-shadow-2xl select-none pointer-events-none relative z-10 animate-title-1"
-          />
-          <img 
-            src={imgTitleBottom} 
-            alt="Title Bottom" 
-            className="w-auto max-w-sm sm:max-w-sm lg:max-w-3xl 2xl:max-w-5xl h-auto object-contain drop-shadow-2xl select-none pointer-events-none -mt-4  lg:-mt-8 relative z-20 animate-title-2 "
-          />
+          <h1 className="text-center text-3xl sm:text-5xl lg:text-6xl font-extrabold text-emerald-950 leading-tight drop-shadow-sm">
+            Puzzle Pemrograman<br />Pemilah Sampah
+          </h1>
         </div>
 
         {/* Start Button Graphic (button-mulai.webp) */}
@@ -68,11 +58,7 @@ export default function Splash({ onStart, isMuted, onToggleMute }: SplashProps) 
           className=" cursor-pointer transform hover:scale-110 active:scale-95 transition-all duration-300 hover:brightness-110 focus:outline-none drop-shadow-2xl animate-[pulse_2s_infinite]"
           aria-label="Mulai Game"
         >
-          <img 
-            src={imgButtonMulai} 
-            alt="Mulai" 
-            className="w-auto max-w-[20vw] sm:max-w-[20vw] lg:max-w-[240px] h-auto object-contain select-none pointer-events-none"
-          />
+          <span className="inline-block rounded-2xl bg-emerald-700 text-white px-10 py-4 text-xl font-bold border-b-4 border-emerald-900 shadow-xl">Mulai</span>
         </button>
       </div>
     </div>

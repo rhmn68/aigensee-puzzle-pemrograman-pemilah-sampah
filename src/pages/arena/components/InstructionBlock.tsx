@@ -8,6 +8,8 @@ import { Instruction } from '../../../types';
 
 interface InstructionBlockProps {
   instruction: Instruction;
+  stepNumber?: number;
+  isCompleted?: boolean;
   activeInstructionId?: string | null;
   isDragged?: boolean;
   isOutside?: boolean;
@@ -16,6 +18,8 @@ interface InstructionBlockProps {
 
 export default function InstructionBlock({
   instruction,
+  stepNumber,
+  isCompleted = false,
   activeInstructionId,
   isDragged = false,
   isOutside = false,
@@ -26,19 +30,19 @@ export default function InstructionBlock({
   const getBlockConfig = (type: string) => {
     switch (type) {
       case 'UP':
-        return { label: 'LONCAT' };
+        return { label: 'Loncat' };
       case 'DOWN':
-        return { label: 'BAWAH' };
+        return { label: 'Bawah' };
       case 'LEFT':
-        return { label: 'KIRI' };
+        return { label: 'Kiri' };
       case 'RIGHT':
-        return { label: 'KANAN' };
+        return { label: 'Kanan' };
       case 'PICK':
-        return { label: 'AMBIL' };
+        return { label: 'Ambil' };
       case 'DROP':
-        return { label: 'BUANG' };
+        return { label: 'Buang' };
       default:
-        return { label: 'BLOK' };
+        return { label: 'Blok' };
     }
   };
 
@@ -50,35 +54,19 @@ export default function InstructionBlock({
         textColor: 'text-white font-bold',
       };
     }
-    if (isExecutingCurrent) {
-      return {
-        fillColor: '#FEF3C7',   // amber-100
-        strokeColor: '#F59E0B', // amber-500
-        textColor: 'text-amber-955 font-bold',
-      };
-    }
     switch (type) {
       case 'UP':
+        return { fillColor: '#FACC15', strokeColor: '#A16207', textColor: 'text-amber-950 font-bold' };
       case 'DOWN':
+        return { fillColor: '#64748B', strokeColor: '#475569', textColor: 'text-white font-bold' };
       case 'LEFT':
+        return { fillColor: '#7C3AED', strokeColor: '#5B21B6', textColor: 'text-white font-bold' };
       case 'RIGHT':
-        return {
-          fillColor: '#6d6d6d',
-          strokeColor: '#474747',
-          textColor: 'text-white font-semibold',
-        };
+        return { fillColor: '#2563EB', strokeColor: '#1D4ED8', textColor: 'text-white font-bold' };
       case 'PICK':
-        return {
-          fillColor: '#00b0fc',
-          strokeColor: '#3696c5',
-          textColor: 'text-white font-bold',
-        };
+        return { fillColor: '#0F766E', strokeColor: '#115E59', textColor: 'text-white font-bold' };
       case 'DROP':
-        return {
-          fillColor: '#56cafb',
-          strokeColor: '#56afd4',
-          textColor: 'text-white font-bold',
-        };
+        return { fillColor: '#EA580C', strokeColor: '#C2410C', textColor: 'text-white font-bold' };
       default:
         return {
           fillColor: '#E7E5E4',   // stone-200
@@ -147,8 +135,16 @@ export default function InstructionBlock({
           ? 'py-0.5 pl-4 pr-3 h-7'
           : 'py-0.5 pl-6 pr-6 sm:py-1 sm:pl-6 sm:pr-20 h-7 sm:h-11'
       }`}
+      style={{ opacity: isCompleted ? 0.5 : 1, filter: isExecutingCurrent ? 'drop-shadow(0 0 3px #0f172a)' : undefined }}
+      aria-label={`${stepNumber ? `Langkah ${stepNumber}: ` : ''}${config.label}${isExecutingCurrent ? ', sedang dijalankan' : ''}`}
+      aria-current={isExecutingCurrent ? 'step' : undefined}
       id={`block-flat-${instruction.id}`}
     >
+      {stepNumber !== undefined && (
+        <span className="absolute -top-1 right-[14%] z-20 min-w-3 h-3 sm:min-w-4 sm:h-4 px-0.5 rounded-full bg-white text-slate-900 border border-slate-400 flex items-center justify-center text-[7px] sm:text-[9px] font-sans font-bold leading-none pointer-events-none">
+          {stepNumber}
+        </span>
+      )}
       {/* SVG Bubble Background (Horizontal Puzzle Shape) */}
       <svg
         className={`absolute inset-0 w-full h-full ${
@@ -164,8 +160,8 @@ export default function InstructionBlock({
         />
         {/* Stroke path */}
         <path
-          stroke={colors.strokeColor}
-          strokeWidth="1.5"
+          stroke={isExecutingCurrent ? '#0F172A' : colors.strokeColor}
+          strokeWidth={isExecutingCurrent ? '3' : '1.5'}
           fill="none"
           d="M 14,2 L 102,2 A 4,4 0 0 1 106,6 L 106,12 C 112,12 116,14 116,18 C 116,22 112,24 106,24 L 106,30 A 4,4 0 0 1 102,34 L 14,34 A 4,4 0 0 1 10,30 L 10,24 C 16,24 20,22 20,18 C 20,14 16,12 10,12 L 10,6 A 4,4 0 0 1 14,2 Z"
         />

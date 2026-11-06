@@ -31,7 +31,7 @@ export default function LevelFailModal({
       maxWidth="max-w-md"
       title={
         <div>
-          <h3 className="font-extrabold text-stone-800 text-lg font-heading">AYO COBA LAGI!</h3>
+          <h3 className="font-extrabold text-stone-800 text-lg font-heading">Ayo Coba Lagi!</h3>
           <p className="text-stone-500 text-xs font-sans">Semua ahli pemrograman pernah salah, mari evaluasi langkahmu.</p>
         </div>
       }

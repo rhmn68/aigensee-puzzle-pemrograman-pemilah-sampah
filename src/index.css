@@ -147,7 +147,7 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Set CCRegeneration as the font for all bold texts and headings */
+/* Use mixed-case typography for headings and bold interface text. */
 b,
 strong,
 h1,
@@ -159,7 +159,7 @@ h6,
 .font-bold,
 .font-extrabold,
 .font-black {
-  font-family: var(--font-ccregeneration);
+  font-family: var(--font-sans);
 }
 
 /* Custom scrollbars for logs */

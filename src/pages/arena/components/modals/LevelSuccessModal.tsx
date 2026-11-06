@@ -32,7 +32,7 @@ export default function LevelSuccessModal({
       maxWidth="max-w-md"
       title={
         <div>
-          <h3 className="font-extrabold text-stone-800 text-lg font-heading">MISI SELESAI!</h3>
+          <h3 className="font-extrabold text-stone-800 text-lg font-heading">Misi Selesai!</h3>
           <p className="text-stone-500 text-xs font-sans">Hebat! Kamu berhasil memilah semua sampah.</p>
         </div>
       }
@@ -58,12 +58,12 @@ export default function LevelSuccessModal({
         {/* Stats */}
         <div className="bg-amber-50/80 border border-[#EED4B7] rounded-2xl p-3 flex justify-around text-stone-700">
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500">Total Blok</span>
+            <span className="block text-[10px] font-bold tracking-wider text-stone-500">Total Blok</span>
             <span className="font-mono font-extrabold text-lg text-indigo-700">{totalSteps}</span>
           </div>
           <div className="border-r border-[#EED4B7]/60" />
           <div>
-            <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500">Target Bintang 3</span>
+            <span className="block text-[10px] font-bold tracking-wider text-stone-500">Target Bintang 3</span>
             <span className="font-mono font-extrabold text-lg text-stone-700">≤ {level.starsThreshold.three}</span>
           </div>
         </div>

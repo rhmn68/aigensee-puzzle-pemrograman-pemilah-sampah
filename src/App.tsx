@@ -274,7 +274,7 @@ export default function App() {
 
       {/* Footer Copyright: Hanya tampil di halaman tanpa kontrol (Splash & Dashboard) */}
       {page !== 'arena' && (
-        <footer className="fixed bottom-1.5 left-0 right-0 z-40 text-center pointer-events-none select-none text-[10px] sm:text-xs text-black font-['CCRegeneration'] tracking-wider">
+        <footer className="fixed bottom-1.5 left-0 right-0 z-40 text-center pointer-events-none select-none text-[10px] sm:text-xs text-black font-sans tracking-wider">
           © Copyright 2026 Pusat Perbukuan
         </footer>
       )}

@@ -141,7 +141,7 @@ export default function Dashboard({
                   {/* Card Top: Level Number + Difficulty Badge */}
                   <div className="flex items-start justify-between shrink-0">
                     <div className="flex flex-col">
-                      <span className="text-[9px] lg:text-[10px] font-black text-stone-500 tracking-wider uppercase font-display mb-0.5">
+                      <span className="text-[9px] lg:text-[10px] font-black text-stone-500 tracking-wider font-display mb-0.5">
                         Level
                       </span>
                       <span className={`text-2xl lg:text-4xl font-black font-display leading-none bg-gradient-to-br ${theme.bg} bg-clip-text text-transparent`}>

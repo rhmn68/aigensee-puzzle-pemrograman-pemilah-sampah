@@ -14,13 +14,13 @@ interface TourStep {
 
 // Urutan pengenalan tombol — sesuai tombol asli di CommandPanel (arena)
 const STEPS: TourStep[] = [
-  { targetId: 'add-btn-RIGHT',  title: 'Tombol KANAN',  desc: 'Menggerakkan Petugas Sampah 1 petak ke kanan.' },
-  { targetId: 'add-btn-LEFT',   title: 'Tombol KIRI',   desc: 'Menggerakkan Petugas Sampah 1 petak ke kiri.' },
-  { targetId: 'add-btn-UP',     title: 'Tombol LONCAT', desc: 'Petugas melompat untuk melewati rintangan batu di jalan.' },
-  { targetId: 'add-btn-PICK',   title: 'Tombol AMBIL',  desc: 'Mengambil sampah yang ada di petak yang sama, lalu memasukkannya ke tas.' },
-  { targetId: 'add-btn-DROP',   title: 'Tombol BUANG',  desc: 'Membuang sampah paling atas dari tas ke tong di depan petugas.' },
-  { targetId: 'add-btn-RESET',  title: 'Tombol ULANG',  desc: 'Mengatur ulang level dan menghapus semua langkah yang sudah disusun.' },
-  { targetId: 'run-execution-btn', title: 'Tombol MULAI', desc: 'Menjalankan semua langkah yang sudah kamu susun secara berurutan.' },
+  { targetId: 'add-btn-RIGHT',  title: 'Tombol Kanan',  desc: 'Menggerakkan Petugas Sampah 1 petak ke kanan.' },
+  { targetId: 'add-btn-LEFT',   title: 'Tombol Kiri',   desc: 'Menggerakkan Petugas Sampah 1 petak ke kiri.' },
+  { targetId: 'add-btn-UP',     title: 'Tombol Loncat', desc: 'Petugas melompat untuk melewati rintangan batu di jalan.' },
+  { targetId: 'add-btn-PICK',   title: 'Tombol Ambil',  desc: 'Mengambil sampah yang ada di petak yang sama, lalu memasukkannya ke tas.' },
+  { targetId: 'add-btn-DROP',   title: 'Tombol Buang',  desc: 'Membuang sampah paling atas dari tas ke tong di depan petugas.' },
+  { targetId: 'add-btn-RESET',  title: 'Tombol Ulang',  desc: 'Mengatur ulang level dan menghapus semua langkah yang sudah disusun.' },
+  { targetId: 'run-execution-btn', title: 'Tombol Mulai', desc: 'Menjalankan semua langkah yang sudah kamu susun secara berurutan.' },
   { targetId: 'instructions-dropzone-scrollable', title: 'Area Program', desc: 'Setiap tombol yang kamu klik akan muncul di sini sebagai urutan langkah.' },
 ];
 
@@ -144,7 +144,7 @@ export default function ButtonGuideTour({ isOpen, onClose, playSound }: ButtonGu
       >
         <div className="flex items-center justify-between mb-1.5">
           <span className="text-[10px] font-mono font-bold text-amber-800 bg-amber-100 border border-amber-300 rounded-full px-2 py-0.5">
-            {stepIndex + 1} / {STEPS.length}
+            {stepIndex + 1}/{STEPS.length}
           </span>
           <button
             type="button"
